@@ -1,50 +1,20 @@
-import { Ionicons, Feather } from '@expo/vector-icons';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
-import { useTheme } from 'native-base';
-
-import { Cart } from '../screens/Cart';
-import { Home } from '../screens/Home';
-import { Details } from '../screens/Details';
-
-const { Navigator, Screen } = createBottomTabNavigator();
+import { Ionicons, Feather } from "@expo/vector-icons";
+import { Login } from "@screens/login";
+import { useTheme } from "styled-components";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 export function AppRoutes() {
   const { colors, sizes } = useTheme();
 
+  const { Navigator, Screen } = createNativeStackNavigator();
+
   return (
-    <Navigator
-      screenOptions={{
-        headerShown: false,
-        tabBarShowLabel: false,
-        tabBarActiveTintColor: colors.green[500],
-        tabBarInactiveTintColor: colors.gray[300],
-        tabBarStyle: {
-          borderTopWidth: 0,
-          backgroundColor: colors.gray[800]
-        },
-      }}>
-      <Screen
-        name="products"
-        component={Home}
-        options={{
-          tabBarIcon: ({ color }) => <Ionicons name="md-home-outline" color={color} size={sizes[6]} />
-        }}
-      />
-
-      <Screen
-        name="cart"
-        component={Cart}
-        options={{
-          tabBarIcon: ({ color }) => <Feather name="shopping-bag" color={color} size={sizes[6]} />,
-        }}
-      />
-
-      <Screen
-        name="details"
-        component={Details}
-        options={{ tabBarButton: () => null }}
-      />
-    </Navigator>
-  )
+      <Navigator screenOptions={{ headerShown: false }}>
+        <Screen
+          name="details"
+          component={Login}
+          // options={{ tabBarButton: () => null }}
+        />
+      </Navigator>
+  );
 }
